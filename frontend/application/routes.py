@@ -229,36 +229,6 @@ check = 0
 
 
 
-
-@app.route('/fetchapi', methods=['GET', 'POST'])
-def fetchapi():
-    if current_user.is_authenticated:
-        req = requests.get('http://127.0.0.1:5000/ourapi')
-        data1=req.content
-        json_data=json.loads(data1)
-        #print(json_data)
-        for i in json_data['userdata']:
-            data = CSVExtract(
-                type=i['Type'],
-                frequency=i['Frequency'],
-                event_date=i['Event Date '],
-                due_data=i['Due Data'],
-                employee=i['Employee'],
-                employee_details=i['Employee Details'],
-                event_code=i['Event Code'],
-                action_perform=i['Action  to be performed'],
-                notification_controller=i['Notification Controller'],
-                notification_event=i['Notification Event'],
-                user_id=current_user.id,
-            )
-            db.session.add(data)
-            db.session.commit()
-        return redirect(url_for('home'))
-    else:
-        return redirect(url_for('home'))
-
-
-
 @app.route("/ourapi")
 def runapi():
     return customapi()

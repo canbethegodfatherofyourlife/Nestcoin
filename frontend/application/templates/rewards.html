@@ -222,9 +222,6 @@ type="text/javascript">
             document.getElementById("connect").style.display = "none";
         })
 
-        document.getElementById("send").addEventListener('click', () => {AirDropToken})
-       
-
 
 const provider = new ethers.providers.Web3Provider(window.ethereum, "rinkeby");
 provider.send("eth_requestAccounts", []).then(() => {
